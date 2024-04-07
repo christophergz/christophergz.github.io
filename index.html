@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Input OTP</title>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+  }
+
+  .form-container {
+    text-align: center;
+  }
+
+  .otp-container {
+    display: flex;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: red;
+    border: none;
+    border-radius: 10px;
+    margin-top: 40px;
+  }
+  
+  input[type="number"] {
+    width: 300px;
+    height: 35px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border: 1.9px solid red;
+    outline: none;
+    border-radius: 10px;
+  }
+
+  input[type="text"] {
+    width: 40px;
+    height: 35px;
+    font-size: 20px;
+    text-align: center;
+    margin: 0 5px;
+    outline: none;
+    border: 1.9px solid red;
+  }
+</style>
+</head>
+<body>
+  <div class="form-container" id="form1">
+    <input type="number" id="phoneNumber" placeholder="Enter your phone number">
+    <button onclick="nextForm()">Lanjut</button>
+  </div>
+  <div class="form-container" id="form2" style="display:none;">
+  <div class="otp-container">
+    <input type="text" maxlength="1" id="digit1" onkeyup="moveToNext(this, 'digit2')">
+    <input type="text" maxlength="1" id="digit2" onkeyup="moveToNext(this, 'digit3')">
+    <input type="text" maxlength="1" id="digit3" onkeyup="moveToNext(this, 'digit4')">
+    <input type="text" maxlength="1" id="digit4" oninput="checkOTP()">
+  </div>
+  </div>
+  <script>
+    function nextForm() {
+      document.getElementById('form1').style.display = 'none';
+      document.getElementById('form2').style.display = 'block';
+      document.getElementById('digit1').focus();
+    }
+
+    function moveToNext(current, nextFieldID) {
+      if (current.value.length >= current.maxLength) {
+        document.getElementById(nextFieldID).focus();
+      }
+    }
+
+    function checkOTP() {
+      const otp1 = document.getElementById('digit1').value;
+      const otp2 = document.getElementById('digit2').value;
+      const otp3 = document.getElementById('digit3').value;
+      const otp4 = document.getElementById('digit4').value;
+
+      if (otp1 && otp2 && otp3 && otp4) {
+        submitOTP();
+      }
+    }
+
+    function submitOTP() {
+      // Handle OTP submission, bisa ditambahkan validasi dsb.
+      alert('OTP submitted successfully!');
+    }
+  </script>
+</body>
+</html>
